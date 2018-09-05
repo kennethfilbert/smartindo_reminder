@@ -33,9 +33,7 @@
 	<?php
 		if($this->session->userdata('isUserLoggedIn')){
 			echo 'Your name is '.$this->session->userdata['isUserLoggedIn']['username'];
-			echo '<br>';
-			echo 'Your email is '.$this->session->userdata['isUserLoggedIn']['email'];
-			echo '<div >';
+	
 			$id = $this->session->userdata['isUserLoggedIn']['id'];
 			//echo '<a href="'.base_url().'index.php/UserAction/logout','"> Logout </a>';]	
 			echo '<hr>';

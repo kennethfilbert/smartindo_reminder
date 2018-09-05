@@ -20,6 +20,9 @@ class UserAction extends CI_Controller {
 		if($this->session->userdata('isUserLoggedIn')){
 			$this->load->view('loginpage', $data);
 		}
+		else{
+			$this->load->view('loginpage', $data);
+		}
 		
 	}
 
@@ -31,6 +34,7 @@ class UserAction extends CI_Controller {
 			$this->load->view('homepage', $data);
 		}
 		else{
+			$data['error_msg'] = "Your session has expired. Please log in again.";
 			$this->load->view('loginpage', $data);
 		}
 		
@@ -45,6 +49,7 @@ class UserAction extends CI_Controller {
 			$this->load->view('manageadmin', $data);
 		}
 		else{
+			$data['error_msg'] = "Your session has expired. Please log in again.";
 			$this->load->view('loginpage', $data);
 		}
 		
@@ -58,6 +63,7 @@ class UserAction extends CI_Controller {
 			$this->load->view('addadmin', $data);
 		}
 		else{
+			$data['error_msg'] = "Your session has expired. Please log in again.";
 			$this->load->view('loginpage', $data);
 		}
 		
@@ -72,6 +78,7 @@ class UserAction extends CI_Controller {
 			$this->load->view('manageclient', $data);
 		}
 		else{
+			$data['error_msg'] = "Your session has expired. Please log in again.";
 			$this->load->view('loginpage', $data);
 		}
 		
@@ -86,6 +93,7 @@ class UserAction extends CI_Controller {
 			$this->load->view('addclient', $data);
 		}
 		else{
+			$data['error_msg'] = "Your session has expired. Please log in again.";
 			$this->load->view('loginpage', $data);
 		}
 		
@@ -100,6 +108,7 @@ class UserAction extends CI_Controller {
 			$this->load->view('managepaymentmtc', $data);
 		}
 		else{
+			$data['error_msg'] = "Your session has expired. Please log in again.";
 			$this->load->view('loginpage', $data);
 		}
         
@@ -114,6 +123,7 @@ class UserAction extends CI_Controller {
 			$this->load->view('inputpaymentmtc', $data);
 		}
 		else{
+			$data['error_msg'] = "Your session has expired. Please log in again.";
 			$this->load->view('loginpage', $data);
 		}
         
