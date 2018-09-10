@@ -17,6 +17,8 @@ class UserAction extends CI_Controller {
 		$data = array();
 		$data['js'] = $this->load->view('include/script.php', NULL, TRUE);
 		$data['css'] = $this->load->view('include/style.php', NULL, TRUE);
+		$loggedInAmount = $this->DataModel->getLoginNumber();
+		var_dump($loggedInAmount);
 		if($this->session->userdata('isUserLoggedIn')){
 			$this->load->view('loginpage', $data);
 		}
@@ -160,35 +162,55 @@ class UserAction extends CI_Controller {
 			         		'adm_pass' => md5($this->input->post('password'))
 			         		);
 
-			         	$result = $this->UserModel->login($loginData);
+						 $result = $this->UserModel->login($loginData);
 
-			         	if($result==TRUE){
-			         		$screenName = $this->input->post('username');
-			         		$result = $this->UserModel->getUserInfo($screenName);
-			         		$sessionData = array(
-			         				'id' => $result[0]->id_admin,
-			         				'username' => $result[0]->admin_name,
-			         				'email' => $result[0]->adm_email,
-			         		);
+						 if($result == TRUE){
+							$loggedInAmount = $this->DataModel->getLoginNumber();
+							$amount = (int)$loggedInAmount;
+							//$x = $this->UserModel->loginChanger($amount);
+							var_dump($amount);
+								if($amount >= 2){
+									$data['error_msg'] = 'Indasdads.';
+									$this->load->view('loginpage', $data);
+								}
+								else{
+									//$this->UserModel->loginChanger($amount);
+									$screenName = $this->input->post('username');
+									$result = $this->UserModel->getUserInfo($screenName);
+									$sessionData = array(
+										'id' => $result[0]->id_admin,
+										'username' => $result[0]->admin_name,
+										'email' => $result[0]->adm_email,
+									);
+	
+									$this->session->set_userdata('isUserLoggedIn', $sessionData);
+									$loggedInUser = $sessionData;
+									$this->load->view('homepage', $data);
+								}								
+						}
+						 else{
+							$data['error_msg'] = 'Invalid username/password.';
+							$this->load->view('loginpage', $data);
+						}
+						
 
-			         		$this->session->set_userdata('isUserLoggedIn', $sessionData);
-			         		$loggedInUser = $sessionData;
-			         		$this->load->view('homepage', $data);
-
-			         	}
-			         	else{
-			         		$data['error_msg'] = 'Invalid username / password';
-			         		$this->load->view('loginpage', $data);
-			         	}
+			         	
 			         
 				}
 		}	
 
 		public function logout(){
-	        $this->session->unset_userdata('isUserLoggedIn');
-	        $this->session->unset_userdata('userId');
-	        $this->session->sess_destroy();
-	        redirect(base_url(), 'refresh');
+			 $loggedInAmount = $this->DataModel->getLoginNumber();
+			 $amount = (int)$loggedInAmount;
+			 var_dump($amount);
+			 if($amount > 0){
+				$this->UserModel->logoutChanger($amount);
+				$this->session->unset_userdata('isUserLoggedIn');
+				$this->session->unset_userdata('userId');
+				$this->session->sess_destroy();
+				redirect(base_url(), 'refresh');
+			 }
+			
     	}
 
     	public function addNewAdmin(){

@@ -113,13 +113,9 @@ class UserModel extends CI_Model{
 	}
 
 	public function addNewPayment($data){
-			
 
-				$this->db->insert('tbl_payment_mtc', $data);
+		$this->db->insert('tbl_payment_mtc', $data);
 				
-
-			
-		
 	}
 
 	public function addToExpiry($date, $id){
@@ -135,6 +131,32 @@ class UserModel extends CI_Model{
 		$condition = "id_payment =" . "'" . $id . "'";
 		$this->db->where($condition);
 		$this->db->delete('tbl_payment_mtc');
+	}
+
+	public function loginChanger($loggedInAmount){
+		
+		$loginData = array(
+			'login_amount' => $loggedInAmount+1,
+			'last_login' => date("Y-m-d H:i:s")
+		);
+		$this->db->where('login_amount', 0);
+		$this->db->update('login_tracker', $loginData);
+			if($loggedInAmount  == 1){
+				
+				return true;
+			}
+			else{
+				return false;
+			}
+		
+	}
+
+	public function logoutChanger($loggedInAmount){
+		$data = array(
+			'login_amount' => $loggedInAmount-1,
+		);
+		$this->db->where('login_amount', 1);
+		$this->db->update('login_tracker', $data);
 	}
 
 

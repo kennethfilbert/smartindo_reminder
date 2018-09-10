@@ -91,6 +91,15 @@ class DataModel extends CI_Model{
 		return $query->row_array();
 	}
 
+	public function getLoginNumber(){
+		$this->db->select('login_amount');
+		$this->db->from('login_tracker');
+		$this->db->limit(1);
+
+		$query = $this->db->get();
+		return $query->row_array();
+	}
+
 	
 
 }
