@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="http://example.com/favicon.ico" />
 	<title>Dashboard</title>
 	<?php
 		echo $js;
@@ -40,6 +41,7 @@
 		<h3>Actions</h3>
 			<ul>
 			<?php
+				echo '<h4>';
 				echo '<li>';
 				echo '<a href="'.base_url().'index.php/UserAction/manageAdmin','">';
 				echo 'Manage Admins</a></li>';
@@ -49,6 +51,7 @@
 				echo '<li>';
 				echo '<a href="'.base_url().'index.php/UserAction/managePaymentMtc','">';
 				echo 'Input Payment Maintenance</a></li>';
+				echo '</h4>';
 			?>
 			</ul>
 		</div>

@@ -155,7 +155,7 @@ class UserModel extends CI_Model{
 		$data = array(
 			'login_amount' => $loggedInAmount-1,
 		);
-		$this->db->where('login_amount', 1);
+		$this->db->where('login_amount', 2);
 		$this->db->update('login_tracker', $data);
 	}
 

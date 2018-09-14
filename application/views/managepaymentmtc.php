@@ -6,7 +6,12 @@
 		echo $js;
 		echo $css;
 	?>
-	<nav class="navbar navbar-expand-sm fixed-top" >
+	<script>
+			$(document).ready(function(){
+				$('#list').DataTable();
+			});
+	</script>
+	<nav class="navbar navbar-expand-sm fixed-top">
 		<div class="container-fluid">
 			<h1 class="navbar-brand">Manage Payment Maintenance</h1>
 			<?php
@@ -32,7 +37,7 @@
 	<div class="container">
 	<?php
 		if($this->session->userdata('isUserLoggedIn')){
-			echo 'Your name is '.$this->session->userdata['isUserLoggedIn']['username'];
+			echo 'Welcome, '.$this->session->userdata['isUserLoggedIn']['username'];
 	
 			$id = $this->session->userdata['isUserLoggedIn']['id'];
 			//echo '<a href="'.base_url().'index.php/UserAction/logout','"> Logout </a>';]	
@@ -41,21 +46,24 @@
 			echo '<a class="btn btn-primary" href="'.base_url().'index.php/UserAction/addPayment/'.$id.'">';
 		}
 	?>
-			<span class="fa fa-plus"></span>
+		<span class="fa fa-plus"></span>
 			Input new payment
 		</a>
-		<br>
-		<div class="container-expand-md">
+		
+		<div class="container-expand-md" style="margin-top:2%;">
 		<table id="list" class='table table-striped table-bordered' cellspacing='0'>
-			<tr>
-				<th>ID</th>
-				<th>Client Name</th>
-				<th>Payment Date</th>
-				<th>Nominal</th>
-				<th>Created By</th>
-				<th>Created On</th>
-				<th>Actions</th>
-			</tr>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Client Name</th>
+					<th>Payment Date</th>
+					<th>Nominal</th>
+					<th>Created By</th>
+					<th>Created On</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
 			<?php
 				foreach ($payments as $key => $value) {
 					$id = $value['id_payment'];
@@ -81,6 +89,7 @@
 					echo "</tr>";
 				}
 			?>
+			</tbody>
 			</table>
 			<?php
 				echo '<a class="btn btn-primary" href="'.base_url().'index.php/UserAction/checkEmail','"><span class="fa fa-envelope"></span>   Send Email</a>';

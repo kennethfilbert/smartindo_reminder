@@ -49,17 +49,20 @@
 			Add new admin
 		</a>
 		<br>
-		<div class="container-expand-md">
+		<div class="container-expand-lg" style="margin-top: 2%;">
 		<table id="list" class='table table-striped table-bordered' cellspacing='0'>
-			<tr>
-				<th>ID</th>
-				<th>Admin Name</th>
-				<th>Admin Username</th>
-				<th>Admin Email</th>
-				<th>Active</th>
-				<th>Created On</th>
-				<th>Actions</th>
-			</tr>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Admin Name</th>
+					<th>Admin Username</th>
+					<th>Admin Email</th>
+					<th>Active</th>
+					<th>Created On</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
 			<?php
 				foreach ($admins as $key => $value) {
 					$id = $value['id_admin'];
@@ -94,6 +97,7 @@
 					echo "</tr>";
 				}
 			?>
+			</tbody>
 			</table>
 			
 		</div>

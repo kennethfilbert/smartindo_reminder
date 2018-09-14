@@ -240,12 +240,12 @@ li a:hover:not(.active) {
     background-color:  black;
 }	
 
-body, html {
+.body, html {
     height: 100%;
     margin: 0;
     
 }
-.
+
 /* Navbar coloring/gradient */
 /* Navbar buttons (currently only Login/Register) */
 .dropdown-toggle::after {

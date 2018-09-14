@@ -167,9 +167,9 @@ class UserAction extends CI_Controller {
 						 if($result == TRUE){
 							$loggedInAmount = $this->DataModel->getLoginNumber();
 							$amount = (int)$loggedInAmount;
-							//$x = $this->UserModel->loginChanger($amount);
+							$x = $this->UserModel->loginChanger($amount);
 							var_dump($amount);
-								if($amount >= 2){
+								if($x == false){
 									$data['error_msg'] = 'Indasdads.';
 									$this->load->view('loginpage', $data);
 								}

@@ -6,6 +6,11 @@
 		echo $js;
 		echo $css;
 	?>
+	<script>
+			$(document).ready(function(){
+				$('#list').DataTable();
+			});
+	</script>
 	<nav class="navbar navbar-expand-sm fixed-top" >
 		<div class="container-fluid">
 			<h1 class="navbar-brand">Manage Clients</h1>
@@ -45,18 +50,21 @@
 			Add new client
 		</a>
 		<br>
-		<div class="container-expand-md">
+		<div class="container-expand-md" style="margin-top:2%">
 		<table id="list" class='table table-striped table-bordered' cellspacing='0'>
-			<tr>
-				<th>ID</th>
-				<th>Client Name</th>
-				<th>Client Email</th>
-				<th>Nominal Tagihan</th>
-				<th>Active</th>
-				<th>Created By</th>
-				<th>Created On</th>
-				<th>Actions</th>
-			</tr>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Client Name</th>
+					<th>Client Email</th>
+					<th>Nominal Tagihan</th>
+					<th>Active</th>
+					<th>Created By</th>
+					<th>Created On</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
 			<?php
 				foreach ($clients as $key => $value) {
 					$id = $value['id_client'];
@@ -93,6 +101,7 @@
 					echo "</tr>";
 				}
 			?>
+			</tbody>
 			</table>
 			
 		</div>
