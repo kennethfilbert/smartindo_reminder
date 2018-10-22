@@ -502,19 +502,25 @@ class UserAction extends CI_Controller {
 	        		<html>
 	        			<head>
 	        				<title>INVOICE</title>
+	        				<img src='http://www.smartindo-technology.com/img/frontend/aboutus_icon_large.png' style='display: block;
+	   						 margin-left: auto;
+	    						margin-right: auto;
+	    					width: 10%;''>
 	        			</head>
 	        			<body>
+	        				<div style='display: block; margin-left: auto;
+							margin-right: auto; width: 70%;'>
 	        				<p>Jakarta ".date('d M Y')."</p>
 	        				<br>
 	        				<p>Kepada Yth: </p>
 	        				".$clientName."
-	        				<br>Di tempat <br>
+	        				<br>Di tempat, <br>
 	        				<br>
 	        				<table>
 								<tr>
 									<th>No</th>
 									<th>Keterangan</th>
-									<th>Nominal></th>
+									<th>Nominal</th>
 								</tr>
 								<tr>
 									<td>1</td>
@@ -537,7 +543,7 @@ class UserAction extends CI_Controller {
 							<p>BANK : BCA</p>
 							<p>A/C	: 701-506-5958</p>
 							<p>A/N	: SMARTINDO TECHNOLOGY, PT</p>
-
+							</div>
 						</body>
 					</html>";
 
@@ -575,14 +581,20 @@ class UserAction extends CI_Controller {
 	        }
 	        	
 	        elseif ($intervalAmount > 0) {
-	         	$subject = "Invoice";
+	         	$subject = "Pengingat Keterlambatan	Pembayaran";
 
 	        	$message = "
 	        		<html>
 	        			<head>
 	        				<title>Surat Keterlambatan Pembayaran</title>
+	        				<img src='http://www.smartindo-technology.com/img/frontend/aboutus_icon_large.png' style='display: block;
+	   						 margin-left: auto;
+	    						margin-right: auto;
+	    					width: 10%;''>
 	        			</head>
 	        			<body>
+	        				<div style='display: block; margin-left: auto;
+							margin-right: auto; width: 70%;'>
 	        				<p>Jakarta ".date('d M Y')."</p>
 	        				<br>
 	        				<p>Kepada Yth: </p>
@@ -621,7 +633,7 @@ class UserAction extends CI_Controller {
 							<p>BANK : BCA</p>
 							<p>A/C	: 701-506-5958</p>
 							<p>A/N	: SMARTINDO TECHNOLOGY, PT</p>
-
+							</div>
 						</body>
 					</html>";
 

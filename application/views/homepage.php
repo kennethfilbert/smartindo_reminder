@@ -9,7 +9,7 @@
 	?>
 	<nav class="navbar navbar-expand-sm fixed-top" >
 		<div class="container-fluid">
-			<h1 class="navbar-brand">Welcome!</h1>
+			<h1 class="navbar-brand">Dashboard</h1>
 			<?php
 				echo '<ul class="navbar-nav ml-auto">';
 		            echo '<li class="nav-item" style="margin: 0px 10px 0px 10px">';
