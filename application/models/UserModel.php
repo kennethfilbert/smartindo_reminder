@@ -113,8 +113,14 @@ class UserModel extends CI_Model{
 	}
 
 	public function addNewPayment($data){
-
-		$this->db->insert('tbl_payment_mtc', $data);
+		if($data['id_client'] == NULL){
+			return false;
+		}
+		else{
+			$this->db->insert('tbl_payment_mtc', $data);
+			return true;
+		}
+		//$this->db->insert('tbl_payment_mtc', $data);
 				
 	}
 
@@ -122,7 +128,7 @@ class UserModel extends CI_Model{
 		$data = array(
 			'exp_date' => $date,
 			'id_client' =>$id
-			);
+		);
 		$this->db->insert('expiry_system', $data);
 	}
 
