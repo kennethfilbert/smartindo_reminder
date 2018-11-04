@@ -39,6 +39,7 @@ class DataModel extends CI_Model{
 		return $query->result_array();
 	}
 
+
 	public function getClientEmail($date){
 		$this->db->select('client_email');
 		$this->db->from('tbl_client');

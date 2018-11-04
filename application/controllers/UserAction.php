@@ -570,6 +570,8 @@ class UserAction extends CI_Controller {
 				//Send email
 		$this->email->send();
 		$this->load->library('encrypt');
+
+		$this->UserModel->setActive($emailAddress);
 	}
 
 	elseif ($intervalAmount > 0) {
@@ -599,7 +601,7 @@ class UserAction extends CI_Controller {
 				<tr>
 					<th>No</th>
 					<th>Keterangan</th>
-					<th>Nominal></th>
+					<th>Nominal</th>
 				</tr>
 				<tr>
 					<td>1</td>

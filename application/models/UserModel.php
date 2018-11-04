@@ -124,11 +124,24 @@ class UserModel extends CI_Model{
 				
 	}
 
+	public function setActive($email){
+		$data = array(
+			'client_active' => 1
+		);
+
+		$this->db->where('client_email', $email);
+		$this->db->update('tbl_client', $data);
+	}
+
 	public function addToExpiry($date, $id){
 		$data = array(
 			'exp_date' => $date,
 			'id_client' =>$id
 		);
+		$condition = "id_client =" . "'" . $id . "'";
+		$this->db->where($condition);
+		$this->db->delete('expiry_system');
+
 		$this->db->insert('expiry_system', $data);
 	}
 
