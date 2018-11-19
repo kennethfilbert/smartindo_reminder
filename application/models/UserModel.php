@@ -155,18 +155,13 @@ class UserModel extends CI_Model{
 	public function loginChanger($loggedInAmount){
 		
 		$loginData = array(
-			'login_amount' => $loggedInAmount+1,
+			'login_amount' => $loggedInAmount,
 			'last_login' => date("Y-m-d H:i:s")
 		);
 		$this->db->where('login_amount', 0);
 		$this->db->update('login_tracker', $loginData);
-			if($loggedInAmount  == 1){
-				
-				return true;
-			}
-			else{
-				return false;
-			}
+		
+		return $loggedInAmount;
 		
 	}
 
@@ -174,7 +169,7 @@ class UserModel extends CI_Model{
 		$data = array(
 			'login_amount' => $loggedInAmount-1,
 		);
-		$this->db->where('login_amount', 2);
+		$this->db->where('login_amount', 1);
 		$this->db->update('login_tracker', $data);
 	}
 

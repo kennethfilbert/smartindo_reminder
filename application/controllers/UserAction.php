@@ -19,7 +19,7 @@ class UserAction extends CI_Controller {
 		$data['js'] = $this->load->view('include/script.php', NULL, TRUE);
 		$data['css'] = $this->load->view('include/style.php', NULL, TRUE);
 		$loggedInAmount = $this->DataModel->getLoginNumber();
-		var_dump($loggedInAmount);
+		//var_dump($loggedInAmount);
 		if($this->session->userdata('isUserLoggedIn')){
 			$this->load->view('loginpage', $data);
 		}
@@ -168,25 +168,29 @@ class UserAction extends CI_Controller {
 			if($result == TRUE){
 				$loggedInAmount = $this->DataModel->getLoginNumber();
 				$amount = (int)$loggedInAmount;
-				$x = $this->UserModel->loginChanger($amount);
-				var_dump($amount);
-				if($x == false){
-					$data['error_msg'] = 'Indasdads.';
-					$this->load->view('loginpage', $data);
-				}
-				else{
-									//$this->UserModel->loginChanger($amount);
+				
+				
+				
+				if($amount == 1){
+					
 					$screenName = $this->input->post('username');
 					$result = $this->UserModel->getUserInfo($screenName);
 					$sessionData = array(
 						'id' => $result[0]->id_admin,
 						'username' => $result[0]->admin_name,
-						'email' => $result[0]->adm_email,
+						'email' => $result[0]->adm_email
 						);
 
 					$this->session->set_userdata('isUserLoggedIn', $sessionData);
 					$loggedInUser = $sessionData;
 					$this->load->view('homepage', $data);
+					$this->UserModel->loginChanger(1);
+				}
+				else if($amount == 0){
+									//$this->UserModel->loginChanger($amount);
+					var_dump($amount);
+					$data['error_msg'] = 'Indasdads.';
+					$this->load->view('loginpage', $data);
 				}								
 			}
 			else{
@@ -203,7 +207,7 @@ class UserAction extends CI_Controller {
 	public function logout(){
 		$loggedInAmount = $this->DataModel->getLoginNumber();
 		$amount = (int)$loggedInAmount;
-		var_dump($amount);
+		//var_dump($amount);
 		if($amount > 0){
 			$this->UserModel->logoutChanger($amount);
 			$this->session->unset_userdata('isUserLoggedIn');
@@ -601,15 +605,17 @@ class UserAction extends CI_Controller {
 				<tr>
 					<th>No</th>
 					<th>Keterangan</th>
+					<th>Batas Pembayaran</th>
 					<th>Nominal</th>
 				</tr>
 				<tr>
 					<td>1</td>
 					<td>Monthly maintenance fee</td>
+					<td>".$max."</td>
 					<td>".$paymentAmount." </td>
 				</tr>
 				<tr>
-					<td colspan='2'> TOTAL </td>
+					<td colspan='3'> TOTAL </td>
 					<td>".$paymentAmount." </td>
 				</tr>
 			</table>
