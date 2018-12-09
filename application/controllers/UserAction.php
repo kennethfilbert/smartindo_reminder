@@ -18,7 +18,7 @@ class UserAction extends CI_Controller {
 		$data = array();
 		$data['js'] = $this->load->view('include/script.php', NULL, TRUE);
 		$data['css'] = $this->load->view('include/style.php', NULL, TRUE);
-		$loggedInAmount = $this->DataModel->getLoginNumber();
+		//$loggedInAmount = $this->DataModel->getLoginNumber();
 		//var_dump($loggedInAmount);
 		if($this->session->userdata('isUserLoggedIn')){
 			$this->load->view('loginpage', $data);
@@ -157,21 +157,20 @@ class UserAction extends CI_Controller {
 			}else{
 				$this->load->view('loginpage', $data);
 			}
-		} else {
+		} 
+		else {
 			$loginData = array(
 				'adm_user' => $this->input->post('username'),
 				'adm_pass' => md5($this->input->post('password'))
-				);
+			);
 
 			$result = $this->UserModel->login($loginData);
 
 			if($result == TRUE){
-				$loggedInAmount = $this->DataModel->getLoginNumber();
-				$amount = (int)$loggedInAmount;
-				
-				
-				
-				if($amount == 1){
+				$loggedInSession = $this->DataModel->getSession();
+				$string = implode($loggedInSession);
+				$length = strlen($string);
+				if($length == 0){
 					
 					$screenName = $this->input->post('username');
 					$result = $this->UserModel->getUserInfo($screenName);
@@ -183,13 +182,14 @@ class UserAction extends CI_Controller {
 
 					$this->session->set_userdata('isUserLoggedIn', $sessionData);
 					$loggedInUser = $sessionData;
+					$sessionId = session_id();	
 					$this->load->view('homepage', $data);
-					$this->UserModel->loginChanger(1);
+					var_dump($length);
+					$this->UserModel->setSession($sessionId);	
+					//$this->UserModel->loginChanger(1);
 				}
-				else if($amount == 0){
-									//$this->UserModel->loginChanger($amount);
-					var_dump($amount);
-					$data['error_msg'] = 'Indasdads.';
+				else if($length > 0){
+					$data['error_msg'] = 'Another user is currently logged in. Please wait.';
 					$this->load->view('loginpage', $data);
 				}								
 			}
@@ -205,17 +205,11 @@ class UserAction extends CI_Controller {
 	}	
 
 	public function logout(){
-		$loggedInAmount = $this->DataModel->getLoginNumber();
-		$amount = (int)$loggedInAmount;
-		//var_dump($amount);
-		if($amount > 0){
-			$this->UserModel->logoutChanger($amount);
 			$this->session->unset_userdata('isUserLoggedIn');
 			$this->session->unset_userdata('userId');
 			$this->session->sess_destroy();
+			$this->UserModel->unsetSession();
 			redirect(base_url(), 'refresh');
-		}
-
 	}
 
 	public function addNewAdmin(){

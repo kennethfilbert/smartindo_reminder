@@ -21,6 +21,24 @@ class UserModel extends CI_Model{
 		}
 	}
 
+	public function setSession($sessionId){
+		$data=array(
+				'session_id'=>$sessionId
+		);
+		
+		$this->db->where('session_id', NULL);
+		$this->db->update('login_tracker',$data);
+	}
+
+	public function unsetSession(){
+		$data=array(
+				'session_id'=>NULL
+		);
+		$this->db->update('login_tracker',$data);
+	}
+
+
+
 	public function getUserInfo($username){
 		$condition = "adm_user =" . "'" . $username . "'";
 		$this->db->select('*');
@@ -152,7 +170,7 @@ class UserModel extends CI_Model{
 		$this->db->delete('tbl_payment_mtc');
 	}
 
-	public function loginChanger($loggedInAmount){
+	/*public function loginChanger($loggedInAmount){
 		
 		$loginData = array(
 			'login_amount' => $loggedInAmount,
@@ -171,7 +189,7 @@ class UserModel extends CI_Model{
 		);
 		$this->db->where('login_amount', 1);
 		$this->db->update('login_tracker', $data);
-	}
+	}*/
 
 
 }
