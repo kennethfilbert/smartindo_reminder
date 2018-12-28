@@ -1,4 +1,4 @@
-w<?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
@@ -76,9 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'smartindo',
+	'username' => 'careermmg_testing',
+	'password' => 'magangmmg2018',
+	'database' => 'careermmg_testing',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
